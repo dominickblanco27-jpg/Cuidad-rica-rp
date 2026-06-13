@@ -1,9 +1,9 @@
 services:
-  - type: worker
+  - type: web
     name: discord-bot
     runtime: node
     buildCommand: npm install -g pnpm && pnpm install
-    startCommand: node artifacts/discord-bot/src/deploy-commands.js && node artifacts/discord-bot/src/index.js
+    startCommand: node src/deploy-commands.js && node src/index.js
     envVars:
       - key: DISCORD_TOKEN
         sync: false
