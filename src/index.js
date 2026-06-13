@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits, Collection } from 'discord.js';
+import { createServer } from 'http';
 import { commands } from './commands/index.js';
 
 const token = process.env.DISCORD_TOKEN;
@@ -8,10 +9,17 @@ if (!token) {
   process.exit(1);
 }
 
+const PORT = process.env.PORT || 3000;
+const server = createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot activo ✅');
+});
+server.listen(PORT, () => {
+  console.log(`🌐 Servidor HTTP corriendo en puerto ${PORT}`);
+});
+
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-  ],
+  intents: [GatewayIntentBits.Guilds],
 });
 
 client.commands = new Collection();
